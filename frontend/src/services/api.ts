@@ -2,7 +2,8 @@ import axios, { AxiosError, AxiosRequestConfig } from 'axios';
 import { useAuthStore } from '../store/authStore';
 import toast from 'react-hot-toast';
 
-const API_BASE_URL = '/api';
+// Use environment variable for production, fallback to /api for local development with proxy
+const API_BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,

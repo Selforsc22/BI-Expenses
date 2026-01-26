@@ -161,6 +161,92 @@ npm run dev -w frontend
 - **Email**: admin@demo.com
 - **Password**: password123
 
+## Deployment
+
+### Docker (Local Full Stack)
+
+Run the entire stack locally with Docker Compose:
+
+```bash
+# Start all services (PostgreSQL, Backend, Frontend)
+docker-compose up -d
+
+# View logs
+docker-compose logs -f
+
+# Stop services
+docker-compose down
+```
+
+Access the application at `http://localhost` (frontend) and `http://localhost:3000` (API).
+
+### Production Deployment (Railway + Vercel)
+
+#### 1. Deploy Backend to Railway
+
+1. Create a new project on [Railway](https://railway.app)
+2. Add a **PostgreSQL** database (click "New" → "Database" → "PostgreSQL")
+3. Add a new service from your GitHub repo:
+   - Set the **Root Directory** to `backend`
+   - Railway will auto-detect the Dockerfile
+4. Add environment variables in Railway dashboard:
+   ```
+   NODE_ENV=production
+   PORT=3000
+   JWT_SECRET=your-secure-secret-minimum-32-chars
+   JWT_EXPIRES_IN=7d
+   FRONTEND_URL=https://your-app.vercel.app
+   ```
+   - `DATABASE_URL` is auto-populated by Railway when you link PostgreSQL
+5. Deploy and note your Railway backend URL (e.g., `https://your-backend.railway.app`)
+
+#### 2. Run Database Migrations on Railway
+
+Option A: Use Railway CLI
+```bash
+railway login
+railway link
+railway run npm run db:migrate -w backend
+railway run npm run db:seed -w backend  # Optional: seed demo data
+```
+
+Option B: Use Railway Shell (in dashboard, click on service → "Shell" tab)
+```bash
+npm run db:migrate
+npm run db:seed
+```
+
+#### 3. Deploy Frontend to Vercel
+
+1. Import your repo on [Vercel](https://vercel.com)
+2. Set the **Root Directory** to `frontend`
+3. Add environment variable:
+   ```
+   VITE_API_URL=https://your-backend.railway.app/api
+   ```
+4. Deploy
+
+#### 4. Update CORS
+
+Go back to Railway and update the `FRONTEND_URL` environment variable with your Vercel URL.
+
+### Environment Variables Reference
+
+#### Backend (Railway)
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `DATABASE_URL` | PostgreSQL connection string | Auto-populated by Railway |
+| `NODE_ENV` | Environment mode | `production` |
+| `PORT` | Server port | `3000` |
+| `JWT_SECRET` | Secret for JWT signing | `your-secure-secret-32-chars` |
+| `JWT_EXPIRES_IN` | Token expiration | `7d` |
+| `FRONTEND_URL` | Vercel frontend URL | `https://your-app.vercel.app` |
+
+#### Frontend (Vercel)
+| Variable | Description | Example |
+|----------|-------------|---------|
+| `VITE_API_URL` | Backend API URL | `https://your-backend.railway.app/api` |
+
 ## API Endpoints
 
 ### Authentication
