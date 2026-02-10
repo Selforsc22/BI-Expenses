@@ -5,8 +5,6 @@ import { Plus, Search, Users } from 'lucide-react';
 import { format } from 'date-fns';
 import clsx from 'clsx';
 
-const formatCurrency = (value: number) =>
-  new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
 
 export default function EmployeesPage() {
   const [search, setSearch] = useState('');

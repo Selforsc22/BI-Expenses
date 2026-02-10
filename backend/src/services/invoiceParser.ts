@@ -171,7 +171,7 @@ export class InvoiceParser {
         // Parse as line items
         const lineItems: ParsedLineItem[] = records.map((record: any) => ({
           description: record[hasDescription] || '',
-          quantity: parseFloat(record[hasQuantity] || '1') || 1,
+          quantity: parseFloat((hasQuantity ? record[hasQuantity] : null) || '1') || 1,
           unitPrice: parseFloat(this.cleanCurrencyValue(record[hasAmount])) || 0,
           total: parseFloat(this.cleanCurrencyValue(record[hasAmount])) || 0,
         }));
@@ -181,7 +181,7 @@ export class InvoiceParser {
         return {
           success: true,
           invoice: {
-            invoice_number: records[0][hasInvoiceNumber] || 'CSV-IMPORT',
+            invoice_number: (hasInvoiceNumber ? records[0][hasInvoiceNumber] : null) || 'CSV-IMPORT',
             vendor_name: this.findValueByKey(records[0], ['vendor', 'supplier', 'from', 'company']),
             invoice_date: new Date(),
             total_amount: totalAmount,

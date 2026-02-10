@@ -601,11 +601,14 @@ router.get(
 
     const expenseMap = new Map(expenses.map(e => [(e as any).id, e]));
 
-    const result = flagged.map(f => ({
-      ...expenseMap.get(f.id),
-      flagReason: f.reason,
-      deviation: f.deviation,
-    }));
+    const result = flagged.map(f => {
+      const expense = expenseMap.get(f.id) || {};
+      return {
+        ...expense,
+        flagReason: f.reason,
+        deviation: f.deviation,
+      };
+    });
 
     res.json({
       success: true,

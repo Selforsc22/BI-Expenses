@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { payrollApi } from '../services/api';
-import { Plus, Search, DollarSign, Calendar } from 'lucide-react';
+import { Plus, DollarSign, Calendar } from 'lucide-react';
 import { format } from 'date-fns';
 import clsx from 'clsx';
 

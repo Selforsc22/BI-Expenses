@@ -3,11 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { reportsApi } from '../services/api';
 import { FileText, TrendingUp, Receipt, Package, Users, DollarSign, Download } from 'lucide-react';
 import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  CartesianGrid,
   Tooltip,
   ResponsiveContainer,
   PieChart,

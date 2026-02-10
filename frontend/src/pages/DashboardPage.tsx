@@ -5,10 +5,6 @@ import {
   TrendingDown,
   DollarSign,
   Receipt,
-  Package,
-  AlertTriangle,
-  FileText,
-  Clock,
 } from 'lucide-react';
 import {
   LineChart,

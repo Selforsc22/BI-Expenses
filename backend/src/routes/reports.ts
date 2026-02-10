@@ -503,7 +503,7 @@ router.get(
       [req.user!.companyId, startDate, endDate]
     );
 
-    const totalDeductible = deductibleExpenses.reduce(
+    const totalDeductible = deductibleExpenses.reduce<number>(
       (sum, e) => sum + parseFloat((e as any).total),
       0
     );

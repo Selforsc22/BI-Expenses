@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { companyApi, authApi } from '../services/api';
 import { useAuthStore } from '../store/authStore';
-import { Building2, User, Lock, Bell, Palette } from 'lucide-react';
+import { Building2, User, Lock, Bell } from 'lucide-react';
 import toast from 'react-hot-toast';
 import clsx from 'clsx';
 
@@ -10,7 +10,6 @@ type TabType = 'company' | 'profile' | 'security' | 'notifications';
 
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState<TabType>('company');
-  const user = useAuthStore((state) => state.user);
 
   const tabs = [
     { id: 'company' as const, name: 'Company', icon: Building2 },

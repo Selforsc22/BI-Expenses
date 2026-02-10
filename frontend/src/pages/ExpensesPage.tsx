@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { expensesApi, categoriesApi } from '../services/api';
-import { Plus, Search, Filter, Edit, Trash2, CheckCircle } from 'lucide-react';
+import { Plus, Search, Edit, Trash2, CheckCircle } from 'lucide-react';
 import { format } from 'date-fns';
 import clsx from 'clsx';
 import toast from 'react-hot-toast';

@@ -1,4 +1,4 @@
-import axios, { AxiosError, AxiosRequestConfig } from 'axios';
+import axios, { AxiosError } from 'axios';
 import { useAuthStore } from '../store/authStore';
 import toast from 'react-hot-toast';
 
